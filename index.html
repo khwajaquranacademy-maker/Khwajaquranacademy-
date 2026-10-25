@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Khwaja Quran Academy | ख्वाजा कुरान अकैडमी</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--g:#0b5d3b;--g2:#073d27;--gold:#d4a63a;--bg:#f7f4ea;--t:#1c2a22}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--t)}
+header{position:sticky;top:0;z-index:20;background:var(--g2);color:#fff;display:flex;align-items:center;gap:12px;padding:8px 16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;margin-right:auto}
+nav a{color:#fff;text-decoration:none;margin-left:14px;cursor:pointer;font-size:15px}
+.ticker{background:var(--gold);color:#222;overflow:hidden;white-space:nowrap;font-weight:600;padding:6px 0}
+.ticker span{display:inline-block;padding-left:100%;animation:m 22s linear infinite}@keyframes m{to{transform:translateX(-100%)}}
+.hero{min-height:60vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;padding:40px 16px;background:linear-gradient(rgba(7,61,39,.7),rgba(7,61,39,.85)),var(--hero) center/cover}
+.hero h1{font-size:clamp(28px,6vw,52px);margin:0 0 8px}.btn{display:inline-block;border:0;border-radius:30px;padding:12px 22px;margin:6px;font-weight:700;cursor:pointer;background:var(--gold);color:#222;text-decoration:none;font-size:15px}
+.btn.alt{background:#fff}.btn.g{background:var(--g);color:#fff}
+section{max-width:1000px;margin:auto;padding:36px 16px}h2{color:var(--g)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px #0001;border-top:4px solid var(--gold)}
+form,.box{background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px #0001}
+input,select,textarea{width:100%;padding:10px;margin:5px 0 12px;border:1px solid #bbb;border-radius:8px;font:inherit}
+.live{background:#b3261e;color:#fff;text-align:center;padding:10px}.live a{color:#fff;font-weight:700}
+#wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:#25d366;color:#fff;border-radius:30px;padding:12px 18px;font-weight:700;text-decoration:none;z-index:15}
+#ld{position:fixed;inset:0;background:var(--g2);display:flex;align-items:center;justify-content:center;z-index:99;transition:opacity .4s}
+#ld.off{opacity:0;pointer-events:none}.lw{position:relative;width:130px;height:130px;display:flex;align-items:center;justify-content:center}
+.lw::before{content:"";position:absolute;inset:0;border:4px solid #fff3;border-top-color:var(--gold);border-radius:50%;animation:s 1s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+pre{white-space:pre-wrap;font:inherit}footer{background:var(--g2);color:#fff;text-align:center;padding:20px}
+table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid #ddd;text-align:left;font-size:14px}
+</style></head><body>
+<div id="ld"><div class="lw" id="lg"></div></div>
+<div id="app"></div>
+<script>
+const SB_URL="https://qsnhvbepetrriuoutsfx.supabase.co",SB_KEY="sb_publishable_7ZeUxMf61urLKkDH_AcwOg_F9ne_nJL";
+const sb=SB_URL?supabase.createClient(SB_URL,SB_KEY):null;
+const COURSES=["Noorani Qaida (नूरानी क़ायदा)","Nazra Quran (नाज़रा)","Hifz-e-Quran (हिफ़्ज़)","Tajweed Course (तजवीद)","Quran with Translation (तर्जुमा)","Tafseer (तफ़सीर)","Qirat & Makharij (क़िरात)","Daily Duas & Masnoon Duain","Kalima, Namaz & Islamic Basics","Revision / Dohrai Course"];
+let S={ticker:"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ  •  الْحَمْدُ لِلَّهِ  •  لَا إِلٰهَ إِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ",live:"",email:"khwajaquranacademy@gmail.com",whatsapp:"923039740127",bank:"Bank: ____\nAccount title: ____\nAccount no / IBAN: ____",hero:"https://cdn.phototourl.com/member/2026-10-25-e78534cb-1782-46e1-9e67-8caee4aba853.jpg"};
+const LOGO=`<svg width="72%" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#d4a63a"/><circle cx="58" cy="46" r="25" fill="#073d27"/><path d="M30 70h40v8H30z" fill="#fff"/><path d="M50 58l-18 8v4l18-6 18 6v-4z" fill="#fff"/></svg>`;
+document.getElementById("lg").innerHTML=LOGO;
+const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function load(ms=600){$("ld").classList.remove("off");setTimeout(()=>$("ld").classList.add("off"),ms)}
+async function getS(){if(!sb)return;const{data}=await sb.from("settings").select("*");(data||[]).forEach(r=>S[r.key]=r.value)}
+const isAdmin=location.pathname.replace(/\/$/,"")=="/admins/safe";
+function go(id){load();setTimeout(()=>$(id)?.scrollIntoView({behavior:"smooth"}),150)}
+function pub(){
+$("app").innerHTML=`<header><div class="brand"><span style="width:44px;height:44px;display:inline-flex">${LOGO}</span>Khwaja Quran Academy</div><nav><a onclick="go('home')">Home</a><a onclick="go('courses')">Courses</a><a onclick="go('apply')">Apply</a><a onclick="go('contact')">Contact</a></nav></header>
+<div class="ticker"><span>${esc(S.ticker)}</span></div>
+${S.live?`<div class="live">🔴 Live session is on — <a href="${esc(S.live)}" target="_blank" rel="noopener">Join now</a></div>`:""}
+<div class="hero" id="home" style="--hero:url('${esc(S.hero)}')"><h1>ख्वाजा कुरान अकैडमी</h1><p>Learn Quran Majeed online with qualified teachers — for children, from anywhere.</p>
+<div><a class="btn" href="#apply" onclick="go('apply');return false">Apply Now</a><a class="btn alt" target="_blank" href="https://wa.me/${esc(S.whatsapp)}?text=${encodeURIComponent("Assalamu alaikum, I want a demo class.")}">Free Demo Class</a><button class="btn g" onclick="alert('Classes run online 24/7 — choose any time that suits you.')">24/7 Server</button></div></div>
+<section id="courses"><h2>Our Courses</h2><div class="grid">${COURSES.map(c=>`<div class="card">📖 ${c}</div>`).join("")}</div></section>
+<section id="apply"><h2>Admission Form</h2><form id="f"><label>Student name<input name="student_name" required></label><label>Age<input name="age" type="number" min="3" max="18" required></label><label>Parent / guardian name<input name="parent_name" required></label><label>Email<input name="email" type="email" required></label><label>Phone / WhatsApp<input name="phone" required></label><label>Country<input name="country"></label><label>Course<select name="course" required>${COURSES.map(c=>`<option>${c}</option>`).join("")}</select></label><label>Preferred time<input name="timing" placeholder="e.g. 5pm–6pm"></label><label>Notes<textarea name="notes" rows="3"></textarea></label><button class="btn g">Submit Application</button><p id="msg"></p></form></section>
+<section id="contact"><h2>Fee &amp; Contact</h2><div class="box"><b>Bank details</b><pre>${esc(S.bank)}</pre><p>✉️ <a href="mailto:${esc(S.email)}">${esc(S.email)}</a></p></div></section>
+<footer>© Khwaja Quran Academy</footer><a id="wa" target="_blank" rel="noopener" href="https://wa.me/${esc(S.whatsapp)}">💬 WhatsApp</a>`;
+$("f").onsubmit=async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));if(!sb){$("msg").textContent="Backend not connected yet.";return}
+const{error}=await sb.from("applications").insert(d);$("msg").textContent=error?"Error, please try again or use WhatsApp.":"JazakAllah! Your application was received.";if(!error)e.target.reset()}}
+async function admin(){
+$("app").innerHTML=`<section><h2>Admin Panel</h2><div id="ad"></div></section>`;
+if(!sb){$("ad").innerHTML="Set SB_URL and SB_KEY first.";return}
+const{data:{session}}=await sb.auth.getSession();
+if(!session){$("ad").innerHTML=`<form id="lf"><input name="e" type="email" placeholder="Admin email" required><input name="p" type="password" placeholder="Password" required><button class="btn g">Login</button></form>`;
+$("lf").onsubmit=async e=>{e.preventDefault();const f=e.target;const{error}=await sb.auth.signInWithPassword({email:f.e.value,password:f.p.value});error?alert(error.message):admin()};return}
+const{data:apps}=await sb.from("applications").select("*").order("created_at",{ascending:false});
+const K=[["ticker","Top scrolling text (Bismillah / Kalima…)"],["live","Live session link"],["email","Email"],["whatsapp","WhatsApp number (with country code, no +)"],["bank","Bank details"],["hero","Background image URL"]];
+$("ad").innerHTML=`<form id="sf" class="box"><h3>Site settings</h3>${K.map(([k,l])=>`<label>${l}${k=="bank"||k=="ticker"?`<textarea rows="3" name="${k}">${esc(S[k])}</textarea>`:`<input name="${k}" value="${esc(S[k])}">`}</label>`).join("")}<button class="btn g">Save</button> <button type="button" class="btn alt" id="lo">Logout</button></form>
+<h3>Applications (${apps.length})</h3><div class="box" style="overflow:auto"><table><tr><th>Student</th><th>Age</th><th>Course</th><th>Contact</th><th>Status</th><th></th></tr>${apps.map(a=>`<tr><td>${esc(a.student_name)}<br><small>${esc(a.parent_name)}</small></td><td>${a.age}</td><td>${esc(a.course)}</td><td>${esc(a.email)}<br>${esc(a.phone)}</td><td>${a.status}</td><td><button class="btn g" onclick="st(${a.id},'approved')">Approve</button><button class="btn alt" onclick="st(${a.id},'rejected')">Reject</button></td></tr>`).join("")}</table></div>`;
+$("lo").onclick=async()=>{await sb.auth.signOut();admin()};
+$("sf").onsubmit=async e=>{e.preventDefault();const rows=K.map(([k])=>({key:k,value:e.target[k].value}));const{error}=await sb.from("settings").upsert(rows);alert(error?error.message:"Saved")}}
+async function st(id,s){await sb.from("applications").update({status:s}).eq("id",id);admin()}
+(async()=>{await getS();isAdmin?await admin():pub();setTimeout(()=>$("ld").classList.add("off"),900)})();
+</script></body></html>
