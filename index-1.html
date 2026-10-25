@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Khwaja Quran Academy</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--g:#0f4a2f;--d:color-mix(in srgb,var(--g) 75%,#000);--gold:#e2b23a;--bg:#f6f6f4;--t:#1c2a22}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,"Noto Nastaliq Urdu",sans-serif;background:var(--bg);color:var(--t)}
+.top{background:var(--g);color:#fff;overflow:hidden;white-space:nowrap;font-size:15px;padding:6px 0}
+.top span{display:inline-block;padding-inline-start:100%;animation:m 28s linear infinite}@keyframes m{to{transform:translateX(-100%)}}
+[dir=rtl] .top span{animation-name:mr}@keyframes mr{to{transform:translateX(100%)}}
+header{position:sticky;top:0;z-index:30;background:#fff;box-shadow:0 1px 8px #0001;display:flex;align-items:center;gap:12px;padding:10px 4vw}
+.brand{display:flex;align-items:center;gap:10px;margin-inline-end:auto;cursor:pointer}.lg{width:52px;height:52px;display:inline-flex}
+.wm1{font-family:"Arial Narrow","Roboto Condensed",Impact,sans-serif;font-stretch:condensed;font-size:22px;font-weight:600;line-height:1;color:#12281d}.wm2{font-size:9px;letter-spacing:3px;color:#456;margin-top:3px}
+nav{display:flex;gap:22px}nav a{color:#12281d;font-weight:600;cursor:pointer}nav a:hover{color:var(--g)}
+.ib{background:#fff;color:var(--g);border:1.5px solid var(--g);border-radius:10px;padding:9px 14px;font-weight:700;cursor:pointer;font-size:16px}
+#menu{display:none;position:absolute;top:100%;inset-inline-end:10px;background:#fff;color:var(--t);border-radius:12px;box-shadow:0 8px 24px #0004;min-width:230px;overflow:hidden;max-height:80vh;overflow-y:auto}
+#menu a{display:block;padding:13px 18px;cursor:pointer;border-bottom:1px solid #eee}#menu.on{display:block}
+@media(max-width:899px){nav{display:none}.ap{display:none}.wm1{font-size:17px}}
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:10px;padding:12px 24px;font-weight:700;cursor:pointer;background:var(--gold);color:#1a1a1a;text-decoration:none;font-size:16px;font-family:inherit}
+.btn.o{background:transparent;color:#fff;border:2px solid #fff}.btn.g{background:var(--g);color:#fff}.btn.w{background:#fff;color:var(--g);border:1px solid #ccc}.btn.s{padding:9px 20px;font-size:14px;border-radius:30px}
+.hero{min-height:74vh;color:#fff;display:flex;align-items:center;padding:50px 5vw;background:linear-gradient(90deg,color-mix(in srgb,var(--g) 94%,transparent) 0,color-mix(in srgb,var(--g) 82%,transparent) 45%,color-mix(in srgb,var(--g) 15%,transparent) 100%),var(--hero) center/cover,var(--g)}
+[dir=rtl] .hero{background:linear-gradient(270deg,color-mix(in srgb,var(--g) 94%,transparent) 0,color-mix(in srgb,var(--g) 82%,transparent) 45%,color-mix(in srgb,var(--g) 15%,transparent) 100%),var(--hero) center/cover,var(--g)}
+@media(max-width:800px){.hero{background:linear-gradient(color-mix(in srgb,var(--g) 90%,transparent),color-mix(in srgb,var(--g) 78%,transparent)),var(--hero) center/cover,var(--g)}}
+.hin{max-width:600px}.pill{display:inline-block;background:var(--gold);color:#222;font-weight:700;border-radius:10px;padding:8px 14px;font-size:14px;margin:4px 0}
+.hero h1{font-size:clamp(30px,5vw,54px);line-height:1.15;margin:12px 0 14px}.hero p{font-size:17px;line-height:1.7}.cta{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 14px}
+section{max-width:1100px;margin:auto;padding:46px 16px}h2.c{text-align:center;color:var(--g);font-size:clamp(28px,4vw,42px);margin:0 0 6px}.sub{text-align:center;color:#555;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 12px #0001;border-top:4px solid var(--gold);display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.card h3{margin:0;color:var(--g);font-size:22px}.card p{margin:0;line-height:1.6;flex:1}.ic{font-size:38px}
+.stats{max-width:1100px;margin:0 auto;background:#e4f1e8;border-radius:16px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;padding:22px}.stats div{text-align:center}.stats b{font-size:30px;color:#12281d;display:block}
+form,.box{background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px #0001;margin-bottom:12px}
+input,select,textarea{width:100%;padding:10px;margin:5px 0 10px;border:1px solid #bbb;border-radius:8px;font:inherit}
+.live{background:#b3261e;color:#fff;text-align:center;padding:10px}.live a{color:#fff;font-weight:700}
+#wa{position:fixed;inset-inline-end:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));background:#25d366;color:#fff;border-radius:30px;padding:12px 20px;font-weight:700;text-decoration:none;z-index:15;box-shadow:0 4px 14px #0004}
+#sv{position:fixed;inset-inline-start:0;top:50%;transform:translateY(-50%);z-index:15;background:var(--g);color:#fff;border:2px solid var(--gold);border-inline-start:0;border-radius:0 18px 18px 0;padding:16px 14px;font-weight:800;font-size:18px;cursor:pointer;box-shadow:0 4px 16px #0005;line-height:1.3;text-align:center}
+[dir=rtl] #sv{border-radius:18px 0 0 18px}#sv i{display:inline-block;width:11px;height:11px;border-radius:50%;background:#3ddc84;margin-inline-end:6px;animation:p 1.4s infinite}@keyframes p{50%{opacity:.25}}
+#ld{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:99;transition:opacity .4s}#ld.off{opacity:0;pointer-events:none}
+.lw{display:flex;flex-direction:column;align-items:center;gap:16px;color:var(--g);font-weight:700}.lw #lg{width:130px;height:130px}
+.bar{width:190px;height:6px;background:#0f4a2f22;border-radius:6px;overflow:hidden}.bar i{display:block;width:40%;height:100%;background:var(--gold);border-radius:6px;animation:sl .9s ease-in-out infinite alternate}@keyframes sl{from{margin-inline-start:0}to{margin-inline-start:60%}}
+#pn{display:none;position:fixed;inset:0;background:#000a;z-index:60;overflow-y:auto;padding:4vh 12px}#pn.on{display:block}
+.pb{background:var(--bg);max-width:640px;margin:auto;border-radius:18px;padding:22px;position:relative}.pb h2{color:var(--g);margin-top:0}.x{position:absolute;top:10px;inset-inline-end:12px;border:0;background:#fff;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer}
+pre{white-space:pre-wrap;font:inherit;margin:4px 0;line-height:1.7}
+footer{background:var(--d);color:#e8efe9;margin-top:30px;border-top:5px solid var(--gold);background-image:repeating-conic-gradient(from 0deg at 50% 0,#e2b23a0d 0 6deg,transparent 6deg 12deg)}
+.fb{max-width:1100px;margin:auto;padding:36px 18px 10px}.ar{font-size:clamp(26px,5vw,40px);color:var(--gold);text-align:center;line-height:1.9;font-family:"Amiri","Noto Naskh Arabic",serif}
+.kl{text-align:center;font-size:22px;line-height:1.9;font-family:"Amiri","Noto Naskh Arabic",serif;border-top:1px solid #fff3;border-bottom:1px solid #fff3;padding:14px 0;margin:18px 0}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:20px}.fg h4{color:var(--gold);margin:0 0 10px}.fg a,.fg p{display:block;color:#e8efe9;margin:7px 0;cursor:pointer;line-height:1.6;font-size:15px}
+.cp{text-align:center;padding:16px;font-size:14px;opacity:.85}
+table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid #ddd;text-align:start;font-size:14px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.tabs .btn{margin:0}
+a{color:inherit}
+</style></head><body>
+<div id="ld"><div class="lw"><div id="lg"></div><div class="bar"><i></i></div><div>Khwaja Quran Academy</div></div></div><div id="app"></div>
+<script>
+const SB_URL="https://qsnhvbepetrriuoutsfx.supabase.co",SB_KEY="sb_publishable_7ZeUxMf61urLKkDH_AcwOg_F9ne_nJL";
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const T={en:{name:"Khwaja Quran Academy",sub:"ACADEMY FOR QURANIC STUDIES",home:"Home",courses:"Courses",apply:"Apply",contact:"Contact & Support",pay:"Payment Methods",privacy:"Privacy & Security",terms:"Terms & Conditions",refund:"Refund Policy",dash:"Dashboard",h1:"Learn the Holy Quran online with qualified teachers, from anywhere",tag:"Join live one-to-one classes with certified Quran tutors. Flexible timings, personalized lessons, and interactive learning from the comfort of your home.",now:"Apply Now",demo:"Free Demo Class",badge:"24/7 Support • Live Classes • Certified Teachers",ct:"Our Courses",cs2:"Choose from our comprehensive courses designed for all ages and levels",dur:"Duration",fee:"Fee",enr:"Enroll Now",ft:"Admission Form",sn:"Student name",age:"Age",par:"Parent / guardian name",em:"Email",ph:"Phone / WhatsApp",co:"Country",cs:"Course",tm:"Preferred time",nt:"Notes",sub2:"Submit Application",ok:"JazakAllah! Your application was received.",er:"Error. Please try again or use WhatsApp.",live:"Live session is on",join:"Join now",lang:"اردو",srv:"24/7 Server",srv1:"Online now",srv2:"Our classes and support run online 24/7. Choose any time that suits you and message us on WhatsApp.",sup:"We reply on WhatsApp and email. Support is available 24/7.",hd:"The best among you are those who learn the Quran and teach it.",abt:"About Us",ql:"Quick Links",sp:"Support",cn:"Contact",rights:"All rights reserved."},
+ur:{name:"خواجہ قرآن اکیڈمی",sub:"قرآنی علوم کی اکیڈمی",home:"ہوم",courses:"کورسز",apply:"اپلائی",contact:"رابطہ و سپورٹ",pay:"ادائیگی کے طریقے",privacy:"پرائیویسی و سیکیورٹی",terms:"شرائط و ضوابط",refund:"ریفنڈ پالیسی",dash:"ڈیش بورڈ",h1:"مستند اساتذہ کے ساتھ گھر بیٹھے آن لائن قرآن پاک سیکھیں",tag:"مستند قرآن اساتذہ کے ساتھ لائیو ون ٹو ون کلاسز۔ لچکدار اوقات، ذاتی نوعیت کے اسباق اور اپنے گھر کے آرام سے سیکھنے کا موقع۔",now:"ابھی اپلائی کریں",demo:"مفت ڈیمو کلاس",badge:"24/7 سپورٹ • لائیو کلاسز • مستند اساتذہ",ct:"ہمارے کورسز",cs2:"ہر عمر اور سطح کے لیے ہمارے جامع کورسز میں سے انتخاب کریں",dur:"دورانیہ",fee:"فیس",enr:"ابھی داخلہ لیں",ft:"داخلہ فارم",sn:"طالب علم کا نام",age:"عمر",par:"والد / سرپرست کا نام",em:"ای میل",ph:"فون / واٹس ایپ",co:"ملک",cs:"کورس",tm:"پسندیدہ وقت",nt:"نوٹس",sub2:"درخواست جمع کریں",ok:"جزاک اللہ! آپ کی درخواست موصول ہو گئی۔",er:"خرابی۔ دوبارہ کوشش کریں یا واٹس ایپ کریں۔",live:"لائیو سیشن جاری ہے",join:"شامل ہوں",lang:"English",srv:"24/7 سرور",srv1:"ابھی آن لائن",srv2:"ہماری کلاسیں اور سپورٹ 24 گھنٹے آن لائن ہیں۔ اپنی سہولت کا وقت چنیں اور واٹس ایپ پر پیغام کریں۔",sup:"ہم واٹس ایپ اور ای میل پر جواب دیتے ہیں۔ سپورٹ 24/7 دستیاب ہے۔",hd:"تم میں سب سے بہتر وہ ہے جو قرآن سیکھے اور سکھائے۔",abt:"ہمارے بارے میں",ql:"فوری لنکس",sp:"سپورٹ",cn:"رابطہ",rights:"جملہ حقوق محفوظ ہیں۔"}};
+let L="en";try{L=localStorage.getItem("l")||"en"}catch(e){}
+let S={ticker:"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ  •  الْحَمْدُ لِلَّهِ  •  لَا إِلٰهَ إِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ",live:"",email:"khwajaquranacademy@gmail.com",whatsapp:"923039740127",color:"#0f4a2f",hero:"https://cdn.phototourl.com/member/2026-10-25-e78534cb-1782-46e1-9e67-8caee4aba853.jpg",trust:"",about:"Khwaja Quran Academy offers online Quran classes for children and adults with qualified teachers, flexible timings and personal attention.",teachers:"",stats:"",privacy:"We collect only the details you enter in the admission form (student and parent name, age, email, phone, country) to process your admission and contact you. We do not sell or share your information. Data is sent over HTTPS and stored in a secured database; only the academy admin can view it. To correct or delete your data, contact us by email or WhatsApp.",terms:"Classes are held online at the timings agreed with the teacher. Admission is confirmed after approval and fee payment. Students are expected to attend regularly and respect teachers. The academy may change schedules with prior notice.",refund:"Fee and refund details are shared at the time of admission. For any payment query, contact us on WhatsApp or email."},C=[],P=[];
+const LOGO=`<svg width="100%" viewBox="40 140 1460 1360"><rect x="109" y="216" width="1318" height="1218" rx="290" fill="none" stroke="#173d29" stroke-width="82"/><g fill="#173d29"><rect x="242" y="365" width="88" height="920"/><polygon points="330,765 452,642 458,758 396,818 780,1285 665,1285 330,880"/><path d="M1160 810A318 318 0 1 0 865 1038" fill="none" stroke="#173d29" stroke-width="95"/><path d="M620 685Q760 675 850 765Q940 675 1090 685Q930 700 880 790Q860 820 852 855Q830 790 790 750Q720 695 620 685Z"/><polygon points="1075,745 1355,1272 1258,1285 1070,935 884,1285 780,1285"/></g></svg>`;
+const $=i=>document.getElementById(i),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),t=k=>T[L][k];
+$("lg").innerHTML=LOGO;
+function load(ms=700){$("ld").classList.remove("off");setTimeout(()=>$("ld").classList.add("off"),ms)}
+async function getD(){const a=await sb.from("settings").select("*"),b=await sb.from("courses").select("*").order("sort"),c=await sb.from("payments").select("*").order("id");(a.data||[]).forEach(r=>S[r.key]=r.value);C=b.data||[];P=c.data||[];document.documentElement.style.setProperty("--g",S.color||"#0f4a2f")}
+const isAdmin=location.pathname.replace(/\/$/,"")=="/admins/safe";
+function go(id){$("menu")?.classList.remove("on");$("pn")?.classList.remove("on");load();setTimeout(()=>{id=="home"?scrollTo({top:0,behavior:"smooth"}):$(id)?.scrollIntoView({behavior:"smooth"})},200)}
+function setL(){L=L=="en"?"ur":"en";try{localStorage.setItem("l",L)}catch(e){}load();setTimeout(render,250)}
+const cn=c=>L=="ur"&&c.name_ur?c.name_ur:c.name,cd=c=>L=="ur"&&c.details_ur?c.details_ur:c.details;
+function panel(k,cid){$("menu")?.classList.remove("on");load(500);setTimeout(()=>{let h="",ti=t(k);
+if(k=="apply"){ti=t("ft");h=`<form id="f"><label>${t("sn")}<input name="student_name" required></label><label>${t("age")}<input name="age" type="number" min="3" max="18" required></label><label>${t("par")}<input name="parent_name" required></label><label>${t("em")}<input name="email" type="email" required></label><label>${t("ph")}<input name="phone" required></label><label>${t("co")}<input name="country"></label><label>${t("cs")}<select name="course" required>${C.map(c=>`<option value="${c.id}">${esc(cn(c))}</option>`).join("")}</select></label><label>${t("tm")}<input name="timing"></label><label>${t("nt")}<textarea name="notes" rows="3"></textarea></label><button class="btn g">${t("sub2")}</button><p id="msg"></p></form>`}
+else if(k=="contact")h=`<div class="box">✉️ <a href="mailto:${esc(S.email)}">${esc(S.email)}</a><br>📞 <a href="https://wa.me/${esc(S.whatsapp)}" target="_blank">+${esc(S.whatsapp)} (WhatsApp)</a><p>${t("sup")}</p></div>`;
+else if(k=="pay")h=P.map(p=>`<div class="box"><b>${esc(p.title)}</b><pre>${esc(p.details)}</pre></div>`).join("");
+else h=`<div class="box"><pre>${esc(S[k])}</pre></div>`;
+$("pn").innerHTML=`<div class="pb"><button class="x" onclick="$('pn').classList.remove('on')">✕</button><h2>${ti}</h2>${h}</div>`;$("pn").classList.add("on");
+if(k=="apply"){if(cid)document.querySelector("[name=course]").value=cid;$("f").onsubmit=async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target)),c=C.find(x=>x.id==d.course);d.course=c?c.name:d.course;const{error}=await sb.from("applications").insert(d);$("msg").textContent=error?t("er"):t("ok");if(!error)e.target.reset()}}},300)}
+function pub(){
+document.documentElement.dir=L=="ur"?"rtl":"ltr";document.documentElement.lang=L;
+const st=(S.stats||"").split("\n").filter(x=>x.includes("|")).map(x=>x.split("|"));
+const tc=(S.teachers||"").split("\n").filter(x=>x.trim()).map(x=>x.split("|"));
+const fl=(k,l)=>`<a onclick="panel('${k}')">${l||t(k)}</a>`;
+$("app").style.setProperty("--hero",`url('${S.hero}')`);
+$("app").innerHTML=`<div class="top"><span>${esc(S.ticker)}</span></div>
+<header><div class="brand" onclick="go('home')"><span class="lg">${LOGO}</span><span><div class="wm1">${t("name").toUpperCase()}</div><div class="wm2">${t("sub")}</div></span></div>
+<nav><a onclick="go('home')">${t("home")}</a><a onclick="go('courses')">${t("courses")}</a><a onclick="panel('contact')">${t("contact")}</a></nav>
+<a class="btn s ap" onclick="panel('apply')">${t("now")}</a><button class="ib" onclick="setL()">${t("lang")}</button><button class="ib" aria-label="menu" onclick="$('menu').classList.toggle('on')">⋮</button>
+<div id="menu"><a onclick="go('home')">🏠 ${t("home")}</a><a onclick="go('courses')">📖 ${t("courses")}</a><a onclick="panel('apply')">📝 ${t("apply")}</a><a onclick="panel('contact')">💬 ${t("contact")}</a><a onclick="panel('pay')">💳 ${t("pay")}</a><a onclick="panel('privacy')">🔒 ${t("privacy")}</a><a onclick="panel('terms')">📄 ${t("terms")}</a><a onclick="panel('refund')">↩️ ${t("refund")}</a><a onclick="location.href='/admins/safe'">⚙️ ${t("dash")}</a></div></header>
+${S.live?`<div class="live">🔴 ${t("live")} — <a href="${esc(S.live)}" target="_blank" rel="noopener">${t("join")}</a></div>`:""}
+<div class="hero" id="home"><div class="hin">${S.trust?`<div class="pill">✔ ${esc(S.trust)}</div>`:""}<h1>${t("h1")}</h1><p>${t("tag")}</p>
+<div class="cta"><a class="btn" onclick="panel('apply')">${t("now")} →</a><a class="btn o" target="_blank" href="https://wa.me/${esc(S.whatsapp)}?text=${encodeURIComponent("Assalamu alaikum, I want a demo class.")}">${t("demo")}</a></div><span class="pill">✔ ${t("badge")}</span></div></div>
+<section id="courses"><h2 class="c">${t("ct")}</h2><p class="sub">${t("cs2")}</p><div class="grid">${C.map(c=>`<div class="card"><div class="ic">📖</div><h3>${esc(cn(c))}</h3><p>${esc(cd(c))}</p><small>⏱ ${esc(c.duration)}${c.fee&&c.fee!="—"?` • ${t("fee")}: ${esc(c.fee)}`:""}</small><button class="btn s" onclick="panel('apply',${c.id})">${t("enr")} →</button></div>`).join("")}</div></section>
+${st.length?`<div class="stats">${st.map(([v,l])=>`<div><b>${esc(v)}</b>${esc(l)}</div>`).join("")}</div>`:""}
+${tc.length?`<section><h2 class="c">${L=="ur"?"اساتذہ":"Teachers"}</h2><div class="grid">${tc.map(([n,r])=>`<div class="card"><div class="ic">👤</div><h3>${esc(n)}</h3><p>${esc(r||"")}</p></div>`).join("")}</div></section>`:""}
+<footer><div class="fb"><div class="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+<div class="kl">لَا إِلٰهَ إِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ<br><small style="font-size:17px;color:var(--gold)">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</small><br><small style="font-size:14px;font-family:system-ui">${t("hd")}</small></div>
+<div class="fg"><div><h4>${t("name")}</h4><p>${esc(S.about)}</p></div>
+<div><h4>${t("ql")}</h4><a onclick="go('home')">${t("home")}</a><a onclick="go('courses')">${t("courses")}</a><a onclick="panel('apply')">${t("apply")}</a><a onclick="location.href='/admins/safe'">${t("dash")}</a></div>
+<div><h4>${t("sp")}</h4>${fl("contact")}${fl("pay")}${fl("privacy")}${fl("terms")}${fl("refund")}</div>
+<div><h4>${t("cn")}</h4><p>✉️ <a href="mailto:${esc(S.email)}">${esc(S.email)}</a></p><p>📞 <a href="https://wa.me/${esc(S.whatsapp)}" target="_blank">+${esc(S.whatsapp)}</a></p><p>🕋 24/7</p></div></div></div>
+<div class="cp">© ${new Date().getFullYear()} ${t("name")} • ${t("rights")}</div></footer>
+<button id="sv" onclick="alert(t('srv1')+' — '+t('srv2'))"><i></i>${t("srv")}<br><small>${t("srv1")}</small></button><div id="pn"></div>
+<a id="wa" target="_blank" rel="noopener" href="https://wa.me/${esc(S.whatsapp)}">💬 WhatsApp</a>`}
+const render=()=>isAdmin?admin():pub();
+const CF=["name","name_ur","details","details_ur","duration","fee","sort"],PF=["title","details"];
+async function admin(tab="apps"){document.documentElement.dir="ltr";
+const{data:{session}}=await sb.auth.getSession();
+if(!session){$("app").innerHTML=`<section><h2>Dashboard Login</h2><form id="lf"><input name="e" type="email" placeholder="Admin email" required><input name="p" type="password" placeholder="Password" required><button class="btn g">Login</button></form><a href="/">← Website</a></section>`;
+$("lf").onsubmit=async e=>{e.preventDefault();const f=e.target;const{error}=await sb.auth.signInWithPassword({email:f.e.value,password:f.p.value});error?alert(error.message):admin()};return}
+const tabs=[["apps","Applications"],["courses","Courses"],["payments","Payments"],["settings","Settings"]];
+$("app").innerHTML=`<section><h2>Dashboard</h2><div class="tabs">${tabs.map(([k,l])=>`<button class="btn ${k==tab?"g":"w"}" onclick="admin('${k}')">${l}</button>`).join("")}<button class="btn w" onclick="sb.auth.signOut().then(()=>admin())">Logout</button><a class="btn w" href="/">Website</a></div><div id="ad"></div></section>`;
+const el=$("ad");
+if(tab=="apps"){const{data}=await sb.from("applications").select("*").order("created_at",{ascending:false});
+el.innerHTML=`<div class="box" style="overflow:auto"><table><tr><th>Student</th><th>Age</th><th>Course</th><th>Contact</th><th>Status</th><th></th></tr>${data.map(a=>`<tr><td>${esc(a.student_name)}<br><small>${esc(a.parent_name)}</small></td><td>${a.age}</td><td>${esc(a.course)}</td><td>${esc(a.email)}<br>${esc(a.phone)}</td><td>${a.status}</td><td><button class="btn g s" onclick="st(${a.id},'approved')">Approve</button> <button class="btn w s" onclick="st(${a.id},'rejected')">Reject</button></td></tr>`).join("")}</table></div>`}
+else if(tab=="settings"){const K=[["ticker","Top scrolling text"],["live","Live session link"],["email","Email"],["whatsapp","WhatsApp number (with country code, no +)"],["color","Theme colour"],["hero","Hero background photo URL"],["trust","Trust badge text (optional)"],["about","About us text"],["teachers","Teachers: one per line, Name|Role"],["stats","Stats: one per line, Value|Label (e.g. 50+|Teachers)"],["privacy","Privacy & Security text"],["terms","Terms & Conditions text"],["refund","Refund Policy text"]],TA=["teachers","stats","about","privacy","terms","refund"];
+el.innerHTML=`<form id="sf">${K.map(([k,l])=>`<label>${l}<${k=="color"?`input type="color"`:(TA.includes(k)?`textarea rows="4"`:"input")} name="${k}" ${TA.includes(k)?`>${esc(S[k])}</textarea`:`value="${esc(S[k])}"`}></label>`).join("")}<button class="btn g">Save</button></form>`;
+$("sf").onsubmit=async e=>{e.preventDefault();const{error}=await sb.from("settings").upsert(K.map(([k])=>({key:k,value:e.target[k].value})));alert(error?error.message:"Saved")}}
+else{const tb=tab,F=tb=="courses"?CF:PF,{data}=await sb.from(tb).select("*").order("id");
+el.innerHTML=data.map(r=>`<div class="box" data-t="${tb}" data-id="${r.id}">${F.map(f=>`<label>${f}<input data-f="${f}" value="${esc(r[f])}"></label>`).join("")}<button class="btn g s" onclick="sv(this)">Save</button> <button class="btn w s" onclick="dl(this)">Delete</button></div>`).join("")+`<button class="btn" onclick="ad('${tb}')">+ Add</button>`}}
+async function sv(b){const x=b.parentElement,o={};x.querySelectorAll("[data-f]").forEach(i=>o[i.dataset.f]=i.value);if(o.sort==="")delete o.sort;const{error}=await sb.from(x.dataset.t).update(o).eq("id",x.dataset.id);alert(error?error.message:"Saved")}
+async function dl(b){if(!confirm("Delete?"))return;const x=b.parentElement;await sb.from(x.dataset.t).delete().eq("id",x.dataset.id);admin(x.dataset.t)}
+async function ad(tb){await sb.from(tb).insert(tb=="courses"?{name:"New course",details:""}:{title:"New method",details:""});admin(tb)}
+async function st(id,s){await sb.from("applications").update({status:s}).eq("id",id);admin("apps")}
+(async()=>{await getD();render();setTimeout(()=>$("ld").classList.add("off"),900)})();
+</script></body></html>
